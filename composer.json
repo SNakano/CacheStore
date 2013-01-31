@@ -1,0 +1,24 @@
+{
+    "name": "SNakano/CacheStore",
+    "description": "provides a generic way to cache any data",
+    "license": "MIT",
+    "keywords": ["cache", "memcached", "apc"],
+    "authors": [
+        {
+            "name": "Shinya Nakano",
+            "email": "s.nakano@do-mino.jp"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Domino\\CacheStore\\" : "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "ext-apc": "APC >= 3.1.6 to use the APC storage adapter",
+        "ext-memcached": "Memcached >= 1.0.0 to use the Memcached storage adapter"
+    }
+}
