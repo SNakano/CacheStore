@@ -1,4 +1,4 @@
-Domino Data Cache
+DominoDataCache
 =================
 
 provides a generic way to cache any data.
