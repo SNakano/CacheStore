@@ -17,7 +17,7 @@ using Composer(recommended):
 ```javascript
 {
     "require": {
-        "SNakano/DataCache": "dev-master"
+        "SNakano/DataCache": "1.*"
     }
 }
 ```
@@ -29,14 +29,14 @@ Usage
 
 ```php
 // configure cache setting.
-Domino\Factory::setOptions(
+Domino\CacheStore\Factory::setOptions(
     array(
         array(
             'storage'     => 'apc'
             'default_ttl' => 360
         ),
         array(
-            'strage'      => 'memcached',
+            'storage'     => 'memcached',
             'prefix'      => 'domino_test',
             'default_ttl' => 360,
             'servers'     => array(
