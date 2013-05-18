@@ -1,5 +1,6 @@
 DominoDataCache
 =================
+"!https://travis-ci.org/SNakano/DataCache.png!":https://travis-ci.org/SNakano/DataCache
 
 provides a generic way to cache any data.
 
