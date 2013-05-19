@@ -17,7 +17,7 @@ using Composer(recommended):
 ```javascript
 {
     "require": {
-        "SNakano/DataCache": "1.*"
+        "SNakano/DataCache": "dev-master"
     }
 }
 ```
