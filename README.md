@@ -1,4 +1,4 @@
-DominoDataCacheStore
+DominoCacheStore
 =================
 [![Build Status](https://travis-ci.org/SNakano/CacheStore.png)](https://travis-ci.org/SNakano/CacheStore)
 
