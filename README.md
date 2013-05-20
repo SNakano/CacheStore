@@ -1,6 +1,6 @@
-DominoDataCache
+DominoDataCacheStore
 =================
-[![Build Status](https://travis-ci.org/SNakano/DataCache.png)](https://travis-ci.org/SNakano/DataCache)
+[![Build Status](https://travis-ci.org/SNakano/CacheStore.png)](https://travis-ci.org/SNakano/CacheStore)
 
 provides a generic way to cache any data.
 
@@ -17,7 +17,7 @@ using Composer(recommended):
 ```javascript
 {
     "require": {
-        "SNakano/DataCache": "dev-master"
+        "snakano/cache-store": "1.*"
     }
 }
 ```
@@ -48,7 +48,7 @@ Domino\CacheStore\Factory::setOptions(
 );
 
 // factory cache storage
-$storage = Domino\Factory::factory('memcached');
+$storage = Domino\CacheStore\Factory::factory('memcached');
 
 // set data
 $storage->set('ns1', 'key1', 'value1');
