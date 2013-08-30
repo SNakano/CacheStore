@@ -57,4 +57,39 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $cacheStore = CacheStore\Factory::factory('apc');
         $this->assertInstanceOf('Domino\CacheStore\Storage\Apc', $cacheStore);
     }
+
+    public function testFactoryMemcached()
+    {
+        $memcached_option = array('storage' => 'memcached', 'default_ttl' => 10, 'prefix' => '_md', 'servers' => array());
+        CacheStore\Factory::setOption($memcached_option);
+
+        $cacheStore = CacheStore\Factory::factory('memcached');
+        $this->assertInstanceOf('Domino\CacheStore\Storage\Memcached', $cacheStore);
+    }
+
+    public function testRegisterStorageNotRegistred()
+    {
+        $custom_option = array('storage' => 'custom');
+        CacheStore\Factory::setOption($custom_option);
+
+        $this->setExpectedException('Domino\CacheStore\Exception\StorageException');
+        CacheStore\Factory::factory('custom');
+    }
+
+    public function testRegisterStorage()
+    {
+        $custom_option = array('storage' => 'custom');
+        CacheStore\Factory::setOption($custom_option);
+
+        // register custom storage
+        $customStorage = $this->getMock('Domino\CacheStore\Storage\StorageInterface');
+        CacheStore\Factory::registerStorage('custom', get_class($customStorage));
+        $cacheStore = CacheStore\Factory::factory('custom', get_class($customStorage));
+        $this->assertInstanceOf(get_class($customStorage), $cacheStore);
+
+        // try to register custom storage with bad interface
+        $this->setExpectedException('Domino\CacheStore\Exception\StorageException');
+        CacheStore\Factory::registerStorage('custom2', '\stdClass');
+        CacheStore\Factory::factory('custom2');
+    }
 }
