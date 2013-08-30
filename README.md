@@ -78,6 +78,9 @@ $storage->get('ns2', 'key1');
 # => null
 ```
 
+// register custom cache storage
+$storage = Domino\CacheStore\Factory::registerStorage('acme_storage', 'Acme\Storage\AcmeStorage');
+
 License
 -------
 
