@@ -50,6 +50,9 @@ Domino\CacheStore\Factory::setOptions(
 // factory cache storage
 $storage = Domino\CacheStore\Factory::factory('memcached');
 
+// register custom cache storage
+$storage = Domino\CacheStore\Factory::registerStorage('acme_storage', 'Acme\Storage\AcmeStorage');
+
 // set data
 $storage->set('ns1', 'key1', 'value1');
 $storage->set('ns1', 'key2', 'value2');
@@ -77,9 +80,6 @@ $storage->clearAll();
 $storage->get('ns2', 'key1');
 # => null
 ```
-
-// register custom cache storage
-$storage = Domino\CacheStore\Factory::registerStorage('acme_storage', 'Acme\Storage\AcmeStorage');
 
 License
 -------
