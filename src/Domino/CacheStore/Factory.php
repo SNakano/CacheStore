@@ -9,6 +9,8 @@
 
 namespace Domino\CacheStore;
 
+use Domino\CacheStore\Exception\StorageException;
+
 /**
  * Domino Cache Store Factory
  *
@@ -22,6 +24,15 @@ class Factory
      * @var array
      */
     private static $options = array();
+
+    /**
+     * Registered storage
+     * @var array
+     */
+    private static $storage = array(
+        'apc'       => 'Domino\CacheStore\Storage\Apc',
+        'memcached' => 'Domino\CacheStore\Storage\Memcached',
+    );
 
     /**
      * Set cache store storage options
@@ -78,11 +89,29 @@ class Factory
      * Instantiate a cache storage
      * @param  string  $storage_type cache store storage type (eg. 'apc', 'memcached')
      * @return Storage               cache store storage instance
+     * @throws StorageException when $storage_type is not registered
      */
     public static function factory($storage_type)
     {
-        $storage_class = 'Domino\CacheStore\Storage\\' . ucfirst($storage_type);
+        if (!array_key_exists($storage_type, self::$storage)) {
+            throw new StorageException(sprintf('Storage class not set for type %s', $storage_type));
+        }
+        return new self::$storage[$storage_type](self::getOption($storage_type));
+    }
 
-        return new $storage_class(self::getOption($storage_type));
+    /**
+     * Register a cache storage
+     *
+     * @param $storage_type cache store storage type (eg. 'apc', 'memcached', 'my_apc')
+     * @param $storage_class class name which must implement Domino\CacheStore\Storage\StorageInterface
+     * @throws StorageException when $storage_class not implements Domino\CacheStore\Storage\StorageInterface
+     */
+    public static function registerStorage($storage_type, $storage_class)
+    {
+        $interface = 'Domino\CacheStore\Storage\StorageInterface';
+        if (!in_array($interface, class_implements($storage_class, true))) {
+            throw new StorageException(sprintf('Class %s must implements %s ', $storage_class, $interface));
+        }
+        self::$storage[$storage_type] = $storage_class;
     }
 }
