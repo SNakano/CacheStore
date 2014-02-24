@@ -5,7 +5,7 @@ DominoCacheStore
 provides a generic way to cache any data.
 
 - It provide common interface for cache library.
-- support cache library APC and memcached.
+- support cache library APC, memcached and Redis.
 - support namespace. (use namespace delete)
 
 
@@ -43,6 +43,13 @@ Domino\CacheStore\Factory::setOptions(
                 array('server1', 11211, 20),
                 array('server2', 11211, 80)
             )
+        ),
+        array(
+            'storage'     => 'redis',
+            'prefix'      => 'domino_test',
+            'host'        => '127.0.0.1',
+            'port'        => 6379,
+            'default_ttl' => 360
         )
     )
 );
