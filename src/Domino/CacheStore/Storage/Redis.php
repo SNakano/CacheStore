@@ -78,7 +78,7 @@ class Redis implements StorageInterface
         $store_key = $this->getStoreKey($namespace, $key);
         $expire    = is_null($ttl) ? $this->default_ttl : $ttl;
 
-        return $this->connect->set($store_key, $value, $expire);
+        return $this->connect->set($store_key, serialize($value), $expire);
     }
 
     /**
@@ -90,7 +90,7 @@ class Redis implements StorageInterface
     public function get($namespace, $key)
     {
         $store_key = $this->getStoreKey($namespace, $key);
-        $value     = $this->connect->get($store_key);
+        $value     = unserialize($this->connect->get($store_key));
 
         return ($value === false) ? null : $value;
     }

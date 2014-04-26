@@ -40,6 +40,12 @@ class RedisTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('value', $this->redis->get('namespace', 'key'));
     }
 
+    public function testSetAndGetForArray()
+    {
+        $this->redis->set('namespace', 'key', array('key' => 'value'));
+        $this->assertEquals(array('key' => 'value'), $this->redis->get('namespace', 'key'));
+    }
+
     public function testClear()
     {
         $this->redis->set('namespace', 'key', 'value');
