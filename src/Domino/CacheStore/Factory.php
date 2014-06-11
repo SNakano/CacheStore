@@ -32,6 +32,7 @@ class Factory
     private static $storage = array(
         'apc'       => 'Domino\CacheStore\Storage\Apc',
         'memcached' => 'Domino\CacheStore\Storage\Memcached',
+        'memcache'  => 'Domino\CacheStore\Storage\Memcache',
         'redis'     => 'Domino\CacheStore\Storage\Redis',
     );
 
