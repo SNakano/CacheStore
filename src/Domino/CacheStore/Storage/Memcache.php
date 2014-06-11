@@ -10,7 +10,7 @@
 namespace Domino\CacheStore\Storage;
 
 /**
- * Domino Cache Store Storage for Memcached
+ * Domino Cache Store Storage for Memcache
  *
  * @package Domino_CacheStore
  * @subpackage Storage
@@ -23,7 +23,7 @@ class Memcache implements StorageInterface
     const SEPARATOR = '-';
 
     /**
-     * Memcached Instance
+     * Memcache Instance
      * @var \Memcache
      */
     private $connect = null;
