@@ -67,6 +67,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Domino\CacheStore\Storage\Memcached', $cacheStore);
     }
 
+    public function testFactoryMemcache()
+    {
+        $memcached_option = array('storage' => 'memcache', 'default_ttl' => 10, 'prefix' => '_md', 'servers' => array());
+        CacheStore\Factory::setOption($memcached_option);
+
+        $cacheStore = CacheStore\Factory::factory('memcache');
+        $this->assertInstanceOf('Domino\CacheStore\Storage\Memcache', $cacheStore);
+    }
+
     public function testRegisterStorageNotRegistred()
     {
         $custom_option = array('storage' => 'custom');
