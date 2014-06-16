@@ -50,7 +50,7 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
     {
         $this->memcache->set('namespace', 'key', 'value');
         $this->memcache->clear('namespace', 'key');
-        $this->assertNull($this->memcache->get('namespace', 'key'));
+        $this->assertFalse($this->memcache->get('namespace', 'key'));
     }
 
     public function testClearAll()
@@ -58,8 +58,8 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
         $this->memcache->set('namespace1', 'key1', 'value1');
         $this->memcache->set('namespace2', 'key2', 'value2');
         $this->memcache->clearAll();
-        $this->assertNull($this->memcache->get('namespace1', 'key1'));
-        $this->assertNull($this->memcache->get('namespace2', 'key2'));
+        $this->assertFalse($this->memcache->get('namespace1', 'key1'));
+        $this->assertFalse($this->memcache->get('namespace2', 'key2'));
     }
 
     public function testClearByNamespace()
@@ -67,7 +67,7 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
         $this->memcache->set('namespace1', 'key1', 'value1');
         $this->memcache->set('namespace2', 'key2', 'value2');
         $this->memcache->clearByNamespace('namespace1');
-        $this->assertNull($this->memcache->get('namespace1', 'key1'));
+        $this->assertFalse($this->memcache->get('namespace1', 'key1'));
         $this->assertEquals('value2', $this->memcache->get('namespace2', 'key2'));
     }
 }
