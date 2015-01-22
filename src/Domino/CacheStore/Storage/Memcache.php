@@ -49,6 +49,7 @@ class Memcache implements StorageInterface
         $this->connect     = new \Memcache;
         $this->prefix      = $options['prefix'];
         $this->default_ttl = $options['default_ttl'];
+        $this->default_flag = isset($options['default_flag'])?$options['default_flag']:0;
         foreach ($options['servers'] as $server) {
             $this->connect->addserver($server[0], $server[1]);
         }
@@ -61,12 +62,13 @@ class Memcache implements StorageInterface
      * @param mixed   $value
      * @param integer $ttl       expiration time (sec)
      */
-    public function set($namespace, $key, $value, $ttl = null)
+    public function set($namespace, $key, $value, $flag = null, $ttl = null)
     {
         $store_key = $this->getStoreKey($namespace, $key);
         $expire    = is_null($ttl) ? $this->default_ttl : $ttl;
+        $flag    = is_null($ttl) ? $this->default_flag : $flag;
 
-        return $this->connect->set($store_key, $value, $expire);
+        return $this->connect->set($store_key, $value, $flag, $expire);
     }
 
     /**
