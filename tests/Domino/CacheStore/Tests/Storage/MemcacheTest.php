@@ -40,12 +40,22 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
         $this->memcache->clearAll();
     }
 
+    public function testObjectIsInstanceOfStorageInterface(){
+        $this->assertInstanceOf('Domino\CacheStore\Storage\StorageInterface', $this->memcache);
+    }
+
+    /**
+     * @depends testObjectIsInstanceOfStorageInterface
+     */
     public function testSetAndGet()
     {
         $this->memcache->set('namespace', 'key', 'value');
         $this->assertEquals('value', $this->memcache->get('namespace', 'key'));
     }
 
+    /**
+     * @depends testObjectIsInstanceOfStorageInterface
+     */
     public function testClear()
     {
         $this->memcache->set('namespace', 'key', 'value');
@@ -53,6 +63,9 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->memcache->get('namespace', 'key'));
     }
 
+    /**
+     * @depends testObjectIsInstanceOfStorageInterface
+     */
     public function testClearAll()
     {
         $this->memcache->set('namespace1', 'key1', 'value1');
@@ -62,6 +75,9 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->memcache->get('namespace2', 'key2'));
     }
 
+    /**
+     * @depends testObjectIsInstanceOfStorageInterface
+     */
     public function testClearByNamespace()
     {
         $this->memcache->set('namespace1', 'key1', 'value1');
