@@ -28,7 +28,7 @@ class Factory
     /**
      * @var array Cache of established connections (to eliminate overhead).
      */
-    private static $connectionMap=array();
+    private static $connectionMap = array();
 
     /**
      * Registered storage
@@ -103,9 +103,8 @@ class Factory
         if (!array_key_exists($storage_type, self::$storage)) {
             throw new StorageException(sprintf('Storage class not set for type %s', $storage_type));
         }
-        if(!isset(self::$connectionMap[$storage_type]))
-        {
-            self::$connectionMap[$storage_type]= new self::$storage[$storage_type](self::getOption($storage_type));
+        if (!isset(self::$connectionMap[$storage_type])) {
+            self::$connectionMap[$storage_type] = new self::$storage[$storage_type](self::getOption($storage_type));
         }
 
         return self::$connectionMap[$storage_type];
