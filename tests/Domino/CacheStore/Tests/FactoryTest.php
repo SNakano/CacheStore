@@ -101,4 +101,27 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         CacheStore\Factory::registerStorage('custom2', '\stdClass');
         CacheStore\Factory::factory('custom2');
     }
+
+    public function testConnectionCache()
+    {
+        $apc_option = array('storage' => 'apc', 'default_ttl' => 10);
+        CacheStore\Factory::setOption($apc_option);
+
+        $store1 = CacheStore\Factory::factory('apc');
+        $store2 = CacheStore\Factory::factory('apc');
+
+        $this->assertSame($store1, $store2);
+    }
+
+    public function testClearConnectionCache()
+    {
+        $apc_option = array('storage' => 'apc', 'default_ttl' => 10);
+        CacheStore\Factory::setOption($apc_option);
+
+        $store1 = CacheStore\Factory::factory('apc');
+        CacheStore\Factory::clearConnectionCache();
+        $store2 = CacheStore\Factory::factory('apc');
+
+        $this->assertNotSame($store1, $store2);
+    }
 }

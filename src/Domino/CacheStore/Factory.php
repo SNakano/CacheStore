@@ -48,6 +48,9 @@ class Factory
     public static function setOptions($options = array())
     {
         self::$options = $options;
+
+        // clear cache storage instances
+        self::$connectionMap = array();
     }
 
     /**
@@ -90,6 +93,14 @@ class Factory
     public static function clearOptions()
     {
         self::$options = array();
+    }
+
+    /**
+     * Clear connection cache
+     */
+    public static function clearConnectionCache()
+    {
+        self::$connectionMap = array();
     }
 
     /**
