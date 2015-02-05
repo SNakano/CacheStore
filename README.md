@@ -1,6 +1,9 @@
 DominoCacheStore
 =================
 [![Build Status](https://travis-ci.org/SNakano/CacheStore.png)](https://travis-ci.org/SNakano/CacheStore)
+[![Latest Stable Version](https://poser.pugx.org/snakano/cache-store/v/stable.svg)](https://packagist.org/packages/snakano/cache-store)
+[![Total Downloads](https://poser.pugx.org/snakano/cache-store/downloads.svg)](https://packagist.org/packages/snakano/cache-store)
+[![License](https://poser.pugx.org/snakano/cache-store/license.svg)](https://packagist.org/packages/snakano/cache-store)
 
 provides a generic way to cache any data.
 
