@@ -19,6 +19,7 @@
     },
     "suggest": {
         "ext-apc": "APC >= 3.1.6 to use the APC storage adapter",
+        "ext-apcu": "APCu >= 4.0.0 to use the APC User Cache",
         "ext-memcached": "Memcached >= 1.0.0 to use the Memcached storage adapter",
         "ext-redis": "Redis >= 2.2.4 to use the Redis storage adapter"
     }
