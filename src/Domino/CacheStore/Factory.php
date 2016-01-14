@@ -10,6 +10,7 @@
 namespace Domino\CacheStore;
 
 use Domino\CacheStore\Exception\StorageException;
+use Domino\CacheStore\Storage\StorageInterface;
 
 /**
  * Domino Cache Store Factory
@@ -106,8 +107,8 @@ class Factory
     /**
      * Instantiate a cache storage
      * @param  string  $storage_type cache store storage type (eg. 'apc', 'memcached')
-     * @return Storage               cache store storage instance
-     * @throws StorageException when $storage_type is not registered
+     * @return StorageInterface      cache store storage instance
+     * @throws StorageException      when $storage_type is not registered
      */
     public static function factory($storage_type)
     {
