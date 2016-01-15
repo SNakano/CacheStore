@@ -1,5 +1,5 @@
-DominoCacheStore
-=================
+# DominoCacheStore
+
 [![Build Status](https://travis-ci.org/SNakano/CacheStore.png)](https://travis-ci.org/SNakano/CacheStore)
 [![Latest Stable Version](https://poser.pugx.org/snakano/cache-store/v/stable.svg)](https://packagist.org/packages/snakano/cache-store)
 [![Total Downloads](https://poser.pugx.org/snakano/cache-store/downloads.svg)](https://packagist.org/packages/snakano/cache-store)
@@ -12,8 +12,7 @@ provides a generic way to cache any data.
 - support namespace. (use namespace delete)
 
 
-Install
--------
+## Install
 
 using Composer(recommended):
 
@@ -27,8 +26,7 @@ using Composer(recommended):
 or cloning this repository.
 
 
-Usage
------
+## Usage
 
 ```php
 // configure cache setting.
@@ -89,9 +87,18 @@ $storage->get('ns2', 'key1');
 $storage->clearAll();
 $storage->get('ns2', 'key1');
 # => null
+
+// disable caching at runtime
+Domino\CacheStore\Factory::disableCaching();
+// since caching is disabled, the factory will return an instance of "NoCache"
+$storage = Domino\CacheStore\Factory::factory('memcached');
+
+// enable caching at runtime
+Domino\CacheStore\Factory::enableCaching();
+// since caching is enabled again, the factory will return an instance of "Memcached"
+$storage = Domino\CacheStore\Factory::factory('memcached');
 ```
 
-License
--------
+## License
 
 MIT license.
