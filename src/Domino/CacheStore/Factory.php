@@ -31,6 +31,9 @@ class Factory
      */
     private static $connectionMap = array();
 
+    /** @var bool */
+    private static $cachingIsDisabled = false;
+
     /**
      * Registered storage
      * @var array
@@ -39,6 +42,7 @@ class Factory
         'apc'       => 'Domino\CacheStore\Storage\Apc',
         'memcached' => 'Domino\CacheStore\Storage\Memcached',
         'memcache'  => 'Domino\CacheStore\Storage\Memcache',
+        'nocache'   => 'Domino\CacheStore\Storage\NoCache',
         'redis'     => 'Domino\CacheStore\Storage\Redis',
     );
 
@@ -105,6 +109,27 @@ class Factory
     }
 
     /**
+     * Changes the behavior of the method factory
+     * If you trigger this method, you will get back a NoCache storage
+     */
+    public static function disableCaching()
+    {
+        self::$cachingIsDisabled = true;
+    }
+
+    /**
+     * Resets behavior of the method factory
+     * If you trigger this method, you will get back the storage you want to
+     *
+     * HINT:
+     *  If you enable caching, I recommend to clear the cache right afterwards.
+     */
+    public static function enableCaching()
+    {
+        self::$cachingIsDisabled = false;
+    }
+
+    /**
      * Instantiate a cache storage
      * @param  string  $storage_type cache store storage type (eg. 'apc', 'memcached')
      * @return StorageInterface      cache store storage instance
@@ -114,6 +139,9 @@ class Factory
     {
         if (!array_key_exists($storage_type, self::$storage)) {
             throw new StorageException(sprintf('Storage class not set for type %s', $storage_type));
+        }
+        if (self::$cachingIsDisabled) {
+            $storage_type = 'nocache';
         }
         if (!isset(self::$connectionMap[$storage_type])) {
             self::$connectionMap[$storage_type] = new self::$storage[$storage_type](self::getOption($storage_type));
@@ -125,8 +153,8 @@ class Factory
     /**
      * Register a cache storage
      *
-     * @param $storage_type cache store storage type (eg. 'apc', 'memcached', 'my_apc')
-     * @param $storage_class class name which must implement Domino\CacheStore\Storage\StorageInterface
+     * @param string $storage_type cache store storage type (eg. 'apc', 'memcached', 'my_apc')
+     * @param string $storage_class class name which must implement Domino\CacheStore\Storage\StorageInterface
      * @throws StorageException when $storage_class not implements Domino\CacheStore\Storage\StorageInterface
      */
     public static function registerStorage($storage_type, $storage_class)
