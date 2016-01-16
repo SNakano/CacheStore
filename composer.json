@@ -17,6 +17,9 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8||~5.1"
+    },
     "suggest": {
         "ext-apc": "APC >= 3.1.6 to use the APC storage adapter",
         "ext-apcu": "APCu >= 4.0.0 to use the APC User Cache",
